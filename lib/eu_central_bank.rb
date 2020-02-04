@@ -176,7 +176,7 @@ class EuCentralBank < Money::Bank::VariableExchange
     rates_source = !!cache ? cache : url
     begin
       parse_rates(open(rates_source))
-    rescue Nokogiri::XML::XPath::SyntaxError
+    rescue Nokogiri::XML::XPath::SyntaxError, Errno::ENOENT
       parse_rates(open(url))
     end
   end
