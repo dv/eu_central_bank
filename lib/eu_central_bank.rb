@@ -121,13 +121,15 @@ class EuCentralBank < Money::Bank::VariableExchange
       RATE_FORMATS.include? format
 
     store.transaction true do
+      rates_to_export = opts.fetch(:custom_rates, rates)
+
       s = case format
       when :json
-        JSON.dump(rates)
+        JSON.dump(rates_to_export)
       when :ruby
-        Marshal.dump(rates)
+        Marshal.dump(rates_to_export)
       when :yaml
-        YAML.dump(rates)
+        YAML.dump(rates_to_export)
       end
 
       unless file.nil?
