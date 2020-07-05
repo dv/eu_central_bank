@@ -133,7 +133,7 @@ class EuCentralBank < Money::Bank::VariableExchange
       end
 
       unless file.nil?
-        File.open(file, "w") {|f| f.write(s) }
+        File.open(file, "wb") {|f| f.write(s) }
       end
 
       s
